@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <p id="status_container">{{ status }}</p>
+    <h1>Book List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.content }}</td>
+                <td>
+                    <a href="{{ url_for('update', _id=book.id) }}">Edit</a>
+                    <form action="{{ url_for('remove', _id=book.id) }}" method="post">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Create a Content</h2>
+    <form action="{{ url_for('add') }}" method="post">
+        <label for="content">Content:</label>
+        <input type="text" id="content" name="content" required><br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
